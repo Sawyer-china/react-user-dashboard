@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, Switch, Redirect, routerRedux } from 'dva/router'
+import {  Route, Switch, Redirect, routerRedux } from 'dva/router'
 import dynamic from 'dva/dynamic'
 import App from './routes/App'
 
@@ -9,7 +9,6 @@ const { ConnectedRouter } = routerRedux
 // import Users from './routes/Users'
 
 function RouterConfig({ history, app }) {
-    console.log(app)
     const IndexPage = dynamic({
         app,
         component: () => import('./routes/IndexPage')

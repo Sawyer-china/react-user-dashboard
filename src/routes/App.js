@@ -11,7 +11,7 @@ let lastHref
 
 class App extends Component {
     render() {
-        let { loading, app, children, location } = this.props
+        let { loading, children, location } = this.props
         const { href } = window.location
         if (lastHref !== href) {
             NProgress.start()

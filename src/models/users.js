@@ -59,7 +59,6 @@ export default {
         // }
         setup({ dispatch, history }) {
             return history.listen(({ pathname, search }) => {
-                console.log(123)
                 // const { query } = url.parse(search)
                 // const oPath = qs.parse(query)
                 // if (pathname === '/users') {

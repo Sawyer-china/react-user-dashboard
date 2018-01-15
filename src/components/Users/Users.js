@@ -1,10 +1,7 @@
 // react
 import React, { Component } from 'react'
-// node
-import qs from 'qs'
 // dva
 import { connect } from 'dva'
-import { RouterRedux } from 'dva/router'
 // antd
 import { Table, Button, Popconfirm, Pagination } from 'antd'
 import UserModal from './UserModal'

@@ -4,14 +4,7 @@ import { connect } from 'dva'
 import styles from './IndexPage.less'
 
 class IndexPage extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            a: 12
-        }
-    }
     render() {
-        const { location } = this.props
         return (
             <div className={styles.normal}>
                 <h1 className={styles.title}>Yay! Welcome to dva!</h1>
@@ -34,10 +27,4 @@ class IndexPage extends React.Component {
 
 IndexPage.propTypes = {}
 
-function mapState() {
-    return {
-        a: 'teswt'
-    }
-}
-
-export default connect(mapState)(IndexPage)
+export default connect()(IndexPage)
