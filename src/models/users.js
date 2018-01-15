@@ -8,8 +8,8 @@ export default {
     namespace: 'users',
     state: {
         list: [],
-        total: null,
-        page: null
+        total: 0,
+        page: 0
     },
     reducers: {
         /**
@@ -17,8 +17,8 @@ export default {
          * @param {*} state 
          * @param {*} param1 
          */
-        save(state, { payload: { data: list, total } }) {
-            return { ...state, list, total }
+        save(state, { payload: { data: list, total, page } }) {
+            return { ...state, list, total, page }
         },
         search(state) {
             return { ...state }
@@ -29,7 +29,11 @@ export default {
             const { data, headers } = yield call(usersService.fetch, { page })
             yield put({
                 type: 'save',
-                payload: { data, total: headers['x-total-count'] }
+                payload: {
+                    data,
+                    total: headers['x-total-count'],
+                    page: parseInt(page, 10)
+                }
             })
         },
         *create({ payload: values }, { call, put }) {
@@ -53,16 +57,17 @@ export default {
         //     done('错了错了')
         // throw new Error('Whoops!')
         // }
-        // setup({ dispatch, history }) {
-        //     return history.listen(({ pathname, search }) => {
-        //         const { query } = url.parse(search)
-        //         const oPath = qs.parse(query)
-        //         if (pathname === '/users') {
-        //             console.log('/users')
-        //             console.log(oPath)
-        //             dispatch({ type: 'fetch', payload: oPath })
-        //         }
-        //     })
-        // }
+        setup({ dispatch, history }) {
+            return history.listen(({ pathname, search }) => {
+                console.log(123)
+                // const { query } = url.parse(search)
+                // const oPath = qs.parse(query)
+                // if (pathname === '/users') {
+                //     console.log('/users')
+                //     console.log(oPath)
+                //     dispatch({ type: 'fetch', payload: oPath })
+                // }
+            })
+        }
     }
 }

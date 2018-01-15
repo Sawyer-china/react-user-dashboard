@@ -17,6 +17,7 @@ const ERROR_MSG_DURATION = 3
 // 1. Initialize
 const app = dva({
     history: createHistory(),
+    ...createLoading({ effects: true }),
     initialState: {
         '@@dva': {
             c: 123,
@@ -32,7 +33,7 @@ const app = dva({
 })
 
 // 2. Plugins
-app.use(createLoading())
+// app.use()
 
 // 3. Model
 // app.model({
@@ -66,4 +67,4 @@ app.start('#root')
 //     payload: 1
 // })
 
-// console.log(b)
+// console.log(app._store)

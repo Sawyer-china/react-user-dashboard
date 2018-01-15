@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 
-import styles from './Users.css'
+import styles from './Users.less'
 
 import MainLayout from '../components/MainLayout/MainLayout'
 import UsersComponent from '../components/Users/Users'
@@ -13,11 +13,9 @@ class Users extends Component {
     render() {
         const { location } = this.props
         return (
-            <MainLayout location={location}>
-                <div className={styles.normal}>
-                    <UsersComponent />
-                </div>
-            </MainLayout>
+            <div className={styles.normal}>
+                <UsersComponent />
+            </div>
         )
     }
 }

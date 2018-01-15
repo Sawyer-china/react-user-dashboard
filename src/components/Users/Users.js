@@ -1,14 +1,16 @@
 // react
 import React, { Component } from 'react'
 // node
-// import qs from 'qs'
+import qs from 'qs'
 // dva
 import { connect } from 'dva'
-// import { RouterRedux } from 'dva/router'
+import { RouterRedux } from 'dva/router'
 // antd
-import { Table, Button, Popconfirm } from 'antd'
+import { Table, Button, Popconfirm, Pagination } from 'antd'
 import UserModal from './UserModal'
 import styles from './Users.css'
+
+import { PAGE_SIZE } from '../../constants'
 
 class Users extends Component {
     // constructor(props) {
@@ -33,15 +35,18 @@ class Users extends Component {
             payload: { id }
         })
     }
+    pageChangeHandler = page => {
+        this.props.dispatch({ type: 'users/fetch', payload: { page } })
+    }
     componentDidMount() {
         const { dispatch, list } = this.props
         if (list.length <= 0) {
-            dispatch({ type: 'users/fetch', payload: {} })
+            dispatch({ type: 'users/fetch', payload: { page: 1 } })
         }
     }
     render() {
-        // const { list: dataSource, loading, total, page: current } = this.props
-        const { list: dataSource, loading } = this.props
+        const { list: dataSource, loading, total, page: current } = this.props
+        // const { list: dataSource, loading, total } = this.props
         const columns = [
             {
                 title: 'Name',
@@ -95,6 +100,14 @@ class Users extends Component {
                         dataSource={dataSource}
                         loading={loading}
                         rowKey={record => record.id}
+                        pagination={false}
+                    />
+                    <Pagination
+                        className="ant-table-pagination"
+                        total={total}
+                        current={current}
+                        pageSize={PAGE_SIZE}
+                        onChange={this.pageChangeHandler}
                     />
                 </div>
             </div>
@@ -104,12 +117,11 @@ class Users extends Component {
 
 function mapStateToProps(state) {
     // 得到modal中的state)
-    // console.log(state.users)
     const { list, total, page } = state.users
     return {
         loading: state.loading.models.users,
         list,
-        total,
+        total: parseInt(total, 10),
         page
     }
 }

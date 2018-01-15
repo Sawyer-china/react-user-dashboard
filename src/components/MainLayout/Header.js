@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
-import { Link } from 'dva/router'
+import { connect } from 'dva'
+import { Link, routerRedux } from 'dva/router'
+import qs from 'qs'
 
 class Header extends Component {
     // constructor(props) {
     //     super(props)
     // }
+    menuClick = ({ item, key, keyPath }) => {
+        if(key !== '/users') return
+        console.log(item, key, keyPath)
+        this.props.dispatch(
+            routerRedux.push({
+                pathname: key,
+                search: qs.stringify({ page: 1 })
+            })
+        )
+    }
     render() {
         const { location } = this.props
         return (
@@ -13,11 +25,13 @@ class Header extends Component {
                 selectedKeys={[location.pathname]}
                 mode="horizontal"
                 theme="dark"
+                onClick={this.menuClick}
             >
                 <Menu.Item key="/users">
-                    <Link to="/users">
+                    <Icon type="bars" />Users
+                    {/* <Link to="/users">
                         <Icon type="bars" />Users
-                    </Link>
+                    </Link> */}
                 </Menu.Item>
                 <Menu.Item key="/">
                     <Link to="/">
@@ -37,4 +51,4 @@ class Header extends Component {
     }
 }
 
-export default Header
+export default connect()(Header)

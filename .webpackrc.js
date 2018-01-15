@@ -1,7 +1,7 @@
 export default {
     theme: {
-        '@primary-color': '#ff0000',
-        '@link-color': '#ff0000',
+        '@primary-color': '#40a9ff',
+        '@link-color': '#40a9ff',
         '@border-radius-base': '4px',
         '@font-size-base': '16px',
         '@line-height-base': '1.2'
