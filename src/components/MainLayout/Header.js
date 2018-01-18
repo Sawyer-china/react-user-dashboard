@@ -10,7 +10,6 @@ class Header extends Component {
     // }
     menuClick = ({ item, key, keyPath }) => {
         if(key !== '/users') return
-        console.log(item, key, keyPath)
         this.props.dispatch(
             routerRedux.push({
                 pathname: key,
